@@ -2,26 +2,26 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.tienda.services.impl;
+package com.TreeHub.services.impl;
 
-import com.tienda.dao.CategoriaDao;
-import com.tienda.domain.Categoria;
-import com.tienda.services.CategoriaService;
+import com.TreeHub.domain.Especie;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import com.TreeHub.dao.EspecieDao;
+import com.TreeHub.services.EspecieService;
 
 @Service
-public class CategoriaServiceImpl implements CategoriaService {
+public class EspecieServiceImpl implements EspecieService {
 
     @Autowired
-    private CategoriaDao categoriaDao;
+    private EspecieDao EspecieDao;
 
     @Override
     @Transactional(readOnly = true)
-    public List<Categoria> getCategorias(boolean activos) {
-        var lista = categoriaDao.findAll();
+    public List<Especie> getEspecies(boolean activos) {
+        var lista = EspecieDao.findAll();
         if (activos) {
             //Se deben eliminar de la lista los inactivos
             lista.removeIf(c -> !c.isActivo());
@@ -31,19 +31,19 @@ public class CategoriaServiceImpl implements CategoriaService {
 
     @Override
     @Transactional(readOnly = true)
-    public Categoria getCategoria(Categoria categoria) {
-        return categoriaDao.findById(categoria.getIdCategoria()).orElse(null);
+    public Especie getEspecie(Especie Especie) {
+        return EspecieDao.findById(Especie.getIdEspecie()).orElse(null);
     }
 
     @Override
     @Transactional
-    public void save(Categoria categoria) {
-        categoriaDao.save(categoria);
+    public void save(Especie Especie) {
+        EspecieDao.save(Especie);
     }
 
     @Override
     @Transactional
-    public void delete(Categoria categoria) {
-        categoriaDao.delete(categoria);
+    public void delete(Especie Especie) {
+        EspecieDao.delete(Especie);
     }
 }

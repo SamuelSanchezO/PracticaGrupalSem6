@@ -1,4 +1,4 @@
-package com.tienda.domain;
+package com.TreeHub.domain;
 
 import jakarta.persistence.*;
 import java.io.Serializable;
@@ -6,24 +6,24 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table (name="categoria")
-public class Categoria implements Serializable{
+@Table (name="Especie")
+public class Especie implements Serializable{
     private static final long serialVersionUID = 1l;
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idCategoria;
+    private Long idEspecie;
     
     private String descripcion;
     private String rutaImagen;
     private boolean activo;
     /*
-create table categoria (
-  id_categoria INT NOT NULL AUTO_INCREMENT,
+create table Especie (
+  id_Especie INT NOT NULL AUTO_INCREMENT,
   descripcion VARCHAR(30) NOT NULL,
   ruta_imagen varchar(1024),
   activo bool,
-  PRIMARY KEY (id_categoria))*/
+  PRIMARY KEY (id_Especie))*/
     
     
 }

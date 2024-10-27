@@ -1,11 +1,11 @@
 
-package com.tienda.dao;
+package com.TreeHub.dao;
 
-import com.tienda.domain.Producto;
+import com.TreeHub.domain.Arbol;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @EnableJpaRepositories
-public interface ProductoDao extends JpaRepository<Producto,Long>{
+public interface ArbolDao extends JpaRepository<Arbol,Long>{
     
 }

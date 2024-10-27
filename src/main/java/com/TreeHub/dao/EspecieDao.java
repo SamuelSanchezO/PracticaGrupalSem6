@@ -1,11 +1,11 @@
 
-package com.tienda.dao;
+package com.TreeHub.dao;
 
-import com.tienda.domain.Categoria;
+import com.TreeHub.domain.Especie;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @EnableJpaRepositories
-public interface CategoriaDao extends JpaRepository<Categoria,Long>{
+public interface EspecieDao extends JpaRepository<Especie,Long>{
     
 }
