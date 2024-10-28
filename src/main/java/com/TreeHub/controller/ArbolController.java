@@ -43,13 +43,13 @@ public class ArbolController {
         return "redirect:/arbol/listado";
     }
 
-    @GetMapping("/eliminar/{idArbol}")
+    @GetMapping("/eliminar/{id_arbol}")
     public String arbolEliminar(Arbol arbol) {
         arbolService.delete(arbol);
         return "redirect:/arbol/listado";
     }
 
-    @GetMapping("/modificar/{idArbol}")
+    @GetMapping("/modificar/{id_arbol}")
     public String arbolModificar(Arbol arbol, Model model) {
         arbol = arbolService.getArbol(arbol);
         model.addAttribute("arbol", arbol);

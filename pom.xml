@@ -8,8 +8,8 @@
         <version>3.3.3</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.tienda</groupId>
-    <artifactId>Tienda</artifactId>
+    <groupId>com.TreeHub</groupId>
+    <artifactId>Practica01</artifactId>
     <version>1</version>
     <name>Practica01</name>
     <description>Proyecto Tienda de miercoles IIIC 2024</description>
