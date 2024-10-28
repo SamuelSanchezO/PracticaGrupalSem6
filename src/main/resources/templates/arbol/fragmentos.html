@@ -48,10 +48,19 @@
                                            name="nombre_comun" required="true"/>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="activo">[[#{arbol.activo}]]</label>
-                                    <input class="form-check-input" type="checkbox" 
-                                           name="activo" id="activo"/>
+                                    <label for="tipo_flor">[[#{arbol.tipo_flor}]]</label>
+                                    <input type="text" class="form-control" 
+                                           name="tipo_flor" required="true"/>
                                 </div>
+                                <div class="mb-3">
+                                    <label for="dureza_madera">[[#{arbol.dureza_madera}]]</label>
+                                    <input type="number" class="form-control" 
+                                           name="dureza_madera" required="true"/>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="altura">[[#{arbol.altura}]]</label>
+                                    <input type="number" class="form-control" 
+                                           name="altura" step="0.01" required="true"/>
                                 <div class="mb-3">
                                     <label for="imagen">[[#{arbol.ruta_imagen}]]</label>
                                     <input class="form-control" 
