@@ -1,5 +1,4 @@
 package com.TreeHub.controller;
-
 import com.TreeHub.domain.Especie;
 import com.TreeHub.services.EspecieService;
 import com.TreeHub.services.impl.FirebaseStorageServiceImpl;
@@ -13,47 +12,47 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 @Controller
-@RequestMapping("/Especie")
+@RequestMapping("/especie")
 public class EspecieController {
     
     @Autowired
-    private EspecieService EspecieService;
+    private EspecieService especieService;
     
     @GetMapping("/listado")
     public String listado(Model model){
-        var lista=EspecieService.getEspecies(false);
-        model.addAttribute("Especies", lista);
+        var lista=especieService.getEspecies(false);
+        model.addAttribute("especies", lista);
         model.addAttribute("totalEspecies", lista.size());
-        return "/Especie/listado";
+        return "/especie/listado";
     }  
         @Autowired
     private FirebaseStorageServiceImpl firebaseStorageService;
     
     @PostMapping("/guardar")
-    public String EspecieGuardar(Especie Especie,
+    public String especieGuardar(Especie especie,
             @RequestParam("imagenFile") MultipartFile imagenFile) {        
         if (!imagenFile.isEmpty()) {
-            EspecieService.save(Especie);
-            Especie.setRutaImagen(
+            especieService.save(especie);
+            especie.setRutaImagen(
                     firebaseStorageService.cargaImagen(
                             imagenFile, 
-                            "Especie", 
-                            Especie.getIdEspecie()));
+                            "especie", 
+                            especie.getIdEspecie()));
         }
-        EspecieService.save(Especie);
-        return "redirect:/Especie/listado";
+        especieService.save(especie);
+        return "redirect:/especie/listado";
     }
 
     @GetMapping("/eliminar/{idEspecie}")
-    public String EspecieEliminar(Especie Especie) {
-        EspecieService.delete(Especie);
-        return "redirect:/Especie/listado";
+    public String especieEliminar(Especie especie) {
+        especieService.delete(especie);
+        return "redirect:/especie/listado";
     }
 
     @GetMapping("/modificar/{idEspecie}")
-    public String EspecieModificar(Especie Especie, Model model) {
-        Especie = EspecieService.getEspecie(Especie);
-        model.addAttribute("Especie", Especie);
-        return "/Especie/modifica";
+    public String especieModificar(Especie especie, Model model) {
+        especie = especieService.getEspecie(especie);
+        model.addAttribute("especie", especie);
+        return "/especie/modifica";
     }
 }

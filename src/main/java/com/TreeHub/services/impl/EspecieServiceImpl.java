@@ -4,24 +4,24 @@
  */
 package com.TreeHub.services.impl;
 
+import com.TreeHub.dao.EspecieDao;
 import com.TreeHub.domain.Especie;
+import com.TreeHub.services.EspecieService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import com.TreeHub.dao.EspecieDao;
-import com.TreeHub.services.EspecieService;
 
 @Service
 public class EspecieServiceImpl implements EspecieService {
 
     @Autowired
-    private EspecieDao EspecieDao;
+    private EspecieDao especieDao;
 
     @Override
     @Transactional(readOnly = true)
     public List<Especie> getEspecies(boolean activos) {
-        var lista = EspecieDao.findAll();
+        var lista = especieDao.findAll();
         if (activos) {
             //Se deben eliminar de la lista los inactivos
             lista.removeIf(c -> !c.isActivo());
@@ -31,19 +31,19 @@ public class EspecieServiceImpl implements EspecieService {
 
     @Override
     @Transactional(readOnly = true)
-    public Especie getEspecie(Especie Especie) {
-        return EspecieDao.findById(Especie.getIdEspecie()).orElse(null);
+    public Especie getEspecie(Especie especie) {
+        return especieDao.findById(especie.getIdEspecie()).orElse(null);
     }
 
     @Override
     @Transactional
-    public void save(Especie Especie) {
-        EspecieDao.save(Especie);
+    public void save(Especie especie) {
+        especieDao.save(especie);
     }
 
     @Override
     @Transactional
-    public void delete(Especie Especie) {
-        EspecieDao.delete(Especie);
+    public void delete(Especie especie) {
+        especieDao.delete(especie);
     }
 }

@@ -1,5 +1,4 @@
 package com.TreeHub.controller;
-
 import com.TreeHub.domain.Arbol;
 import com.TreeHub.services.ArbolService;
 import com.TreeHub.services.impl.FirebaseStorageServiceImpl;
@@ -13,47 +12,47 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 @Controller
-@RequestMapping("/Arbol")
+@RequestMapping("/arbol")
 public class ArbolController {
     
     @Autowired
-    private ArbolService ArbolService;
+    private ArbolService arbolService;
     
     @GetMapping("/listado")
     public String listado(Model model){
-        var lista=ArbolService.getArbols(false);
-        model.addAttribute("Arbols", lista);
-        model.addAttribute("totalArbols", lista.size());
-        return "/Arbol/listado";
+        var lista=arbolService.getArboles(false);
+        model.addAttribute("arboles", lista);
+        model.addAttribute("totalArboles", lista.size());
+        return "/arbol/listado";
     }  
         @Autowired
     private FirebaseStorageServiceImpl firebaseStorageService;
     
     @PostMapping("/guardar")
-    public String ArbolGuardar(Arbol Arbol,
+    public String arbolGuardar(Arbol arbol,
             @RequestParam("imagenFile") MultipartFile imagenFile) {        
         if (!imagenFile.isEmpty()) {
-            ArbolService.save(Arbol);
-            Arbol.setRutaImagen(
+            arbolService.save(arbol);
+            arbol.setRutaImagen(
                     firebaseStorageService.cargaImagen(
                             imagenFile, 
-                            "Arbol", 
-                            Arbol.getIdArbol()));
+                            "arbol", 
+                            arbol.getIdArbol()));
         }
-        ArbolService.save(Arbol);
-        return "redirect:/Arbol/listado";
+        arbolService.save(arbol);
+        return "redirect:/arbol/listado";
     }
 
     @GetMapping("/eliminar/{idArbol}")
-    public String ArbolEliminar(Arbol Arbol) {
-        ArbolService.delete(Arbol);
-        return "redirect:/Arbol/listado";
+    public String arbolEliminar(Arbol arbol) {
+        arbolService.delete(arbol);
+        return "redirect:/arbol/listado";
     }
 
     @GetMapping("/modificar/{idArbol}")
-    public String ArbolModificar(Arbol Arbol, Model model) {
-        Arbol = ArbolService.getArbol(Arbol);
-        model.addAttribute("Arbol", Arbol);
-        return "/Arbol/modifica";
+    public String arbolModificar(Arbol arbol, Model model) {
+        arbol = arbolService.getArbol(arbol);
+        model.addAttribute("arbol", arbol);
+        return "/arbol/modifica";
     }
 }
