@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head  th:replace="~{layout/plantilla :: head}">
+        <title>TreeHub</title>
+        <meta charset="UTF-8"/>
+      
+    </head>
+    <body>
+        
+        <!-- 1 Sección para crear el boton de agregar... llamará a una ventana modal-->
+        <section th:fragment="botonesAgregar" class="py-4 mb-4 bg-light">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3">   
+                        <button type="button" 
+                            class="btn btn-primary btn-block" 
+                            data-bs-toggle="modal" 
+                            data-bs-target="#agregarEspecie">
+                            <i class="fas fa-plus"></i> [[#{especie.agregar}]]
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2 Fragmento para agregar especie, es la ventana modal -->
+        <section th:fragment="agregarEspecie">
+            <div id="agregarEspecie" 
+                 class="modal fade" 
+                 tabindex="-1" 
+                 aria-labelledby="exampleModalLabel" 
+                 aria-hidden="true">
+                <div class="modal-dialog modal-md">
+                    <div class="modal-content">
+                        <div class="modal-header bg-info text-white">
+                            <h5 class="modal-title">[[#{especie.agregar}]]</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div> 
+                        <form th:action="@{/especie/guardar}"
+                              th:object="${especie}"
+                              method="POST" 
+                              class="was-validated" 
+                              enctype="multipart/form-data">
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <label for="descripcion">[[#{especie.descripcion}]]</label>
+                                    <input type="text" class="form-control" 
+                                           name="descripcion" required="true"/>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="activo">[[#{especie.activo}]]</label>
+                                    <input class="form-check-input" type="checkbox" 
+                                           name="activo" id="activo"/>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="imagen">[[#{especie.rutaImagen}]]</label>
+                                    <input class="form-control" 
+                                           type="file" 
+                                           name="imagenFile" 
+                                           onchange="readURL(this);"/>
+                                    <img id="blah" src="#" alt="your image" height="200"/>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-primary" type="submit">Guardar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- 4 Fragmento que se utiliza en la página modifca.html -->
+        <section th:fragment="editarEspecie">
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    <form method="POST"
+                          th:action="@{/especie/guardar}" 
+                          th:object="${especie}"
+                          class="was-validated"                          
+                          enctype="multipart/form-data">
+                        <input type="hidden" name="idEspecie" th:field="*{idEspecie}"/>
+                        <input type="hidden" name="rutaImagen" th:field="*{rutaImagen}"/>
+                        <section th:replace="~{especie/fragmentos :: botonesEditar}"/>
+                        <div id=details>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h4>[[#{accion.actualizar}]]</h4>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="mb-3">
+                                                    <label for="descripcion">[[#{especie.descripcion}]]</label>
+                                                    <input type="text" class="form-control" 
+                                                           name="descripcion" th:field="*{descripcion}"
+                                                           required="true">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="activo">[[#{especie.activo}]]</label>
+                                                    <input class="form-check-input" 
+                                                           type="checkbox" 
+                                                           name="activo" 
+                                                           id="activo"
+                                                           th:field="*{activo}">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="imagen">[[#{especie.rutaImagen}]]</label>
+                                                    <input class="form-control" type="file" name="imagenFile"
+                                                           onchange="readURL(this);" />
+                                                    <img id="blah" th:src="@{${especie.rutaImagen}}" alt="your image" height="200"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5 Fragmento que se utiliza en el fragmento anterior -->
+        <section th:fragment="botonesEditar">
+            <div class="container py-4 mb-4 bg-light">
+                <div class="row">
+                    <div class="col-md-4 d-grid">
+                        <a th:href="@{/especie/listado}" class="btn btn-primary">
+                            <i class="fas fa-arrow-left"></i> [[#{accion.regresar}]]
+                        </a>
+                    </div>
+                    <div class="col-md-4 d-grid">                                
+                        <a th:href="@{/especie/eliminar/}+${especie.idEspecie}"
+                           class="btn btn-danger">
+                            <i class="fas fa-trash"></i> [[#{accion.eliminar}]]
+                        </a>
+                    </div>
+                    <div class="col-md-4 d-grid">
+                        <button type="submit" class="btn btn-success">
+                            <i class="fas fa-check"></i> [[#{accion.guardar}]]
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        
+        <section th:fragment="listadoEspecies">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>[[#{especie.listado}]]</h4>
+                            </div>
+                            <div class="card-body">
+                                <div th:if="${especies != null and !especies.empty}">
+
+                                    <table class="table table-striped table-hover">
+                                        <thead class="table-dark">
+                                            <tr>
+                                                <th>#</th>
+                                                <th>[[#{especie.descripcion}]]</th>
+                                                <th>[[#{especie.activo}]]</th>
+                                                <th>[[#{especie.rutaImagen}]]</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr th:each="c : ${especies}">
+                                                <td>[[${c.idEspecie}]]</td>
+                                                <td>[[${c.descripcion}]]</td>
+                                                <td th:text="${c.activo} ? 'Activo' : 'Inactivo'"></td>
+                                                <td><img th:src="@{${c.rutaImagen}}" height="75"/></td>
+                                                <td>
+                                                    <a class='btn btn-danger'
+                                                       th:href='@{/especie/eliminar/}+${c.idEspecie}'>
+                                                        <i class='fas fa-trash'></i> [[#{accion.eliminar}]]   
+                                                    </a>
+                                                    <a class='btn btn-warning'
+                                                       th:href='@{/especie/modificar/}+${c.idEspecie}'>
+                                                        <i class='fas fa-pencil'></i> [[#{accion.actualizar}]]   
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                                <div th:if="${especies == null or especies.empty}">
+                                    <h4>[[#{lista.vacia}]]</h4>  
+                                </div>
+                            </div>
+                        </div>
+                    </div>  
+                     <div class="col-md-3">
+                         <div class='card text-center text-white bg-success m-3'>
+                             <div class='card-body'>  
+                                 <h3>[[#{especie.total}]]</h3>
+                                 <h4><i class="fas fa-layer-group"></i> [[${totalEspecies}]]</h4>
+                             </div>
+                         </div>
+                      </div>     
+                </div>
+            </div>
+        </section>
+
+    </body>
+</html>
