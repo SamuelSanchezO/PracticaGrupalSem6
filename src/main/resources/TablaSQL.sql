@@ -29,4 +29,4 @@ INSERT INTO arbol (nombre_comun, tipo_flor, dureza_madera, altura, ruta_imagen) 
 ('Pino', 'Amarilla', 400, 25.0, 'https://cdn.pixabay.com/photo/2020/03/11/15/34/pine-4922503_1280.jpg'),
 ('Sauce', 'Verde', 300, 15.0, 'https://upload.wikimedia.org/wikipedia/commons/3/36/Saul_pleureur.jpg'),
 ('Cerezo', 'Rosa', 600, 10.0, 'https://upload.wikimedia.org/wikipedia/commons/1/10/Cerisier_du_Japon_Prunus_serrulata.jpg'),
-('Abeto', 'Blanca', 500, 18.0, 'https://images.app.goo.gl/Nh4jqqNinJ9vRxc97');
+('Abeto', 'Blanca', 500, 18.0, 'https://upload.wikimedia.org/wikipedia/commons/8/85/Sapin_lure.jpg');
