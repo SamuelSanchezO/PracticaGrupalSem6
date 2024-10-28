@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface ArbolService {
 //Se obtiene un arraylist con los registros de la tabla categoría, todos los registros o solo los activos
-public List getArboles (boolean activos);
+public List getArboles ();
 // Se obtiene un Arbol, a partir del id de un arbol
 public Arbol getArbol(Arbol arbol);
 

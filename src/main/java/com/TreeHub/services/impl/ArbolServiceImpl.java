@@ -18,21 +18,16 @@ public class ArbolServiceImpl implements ArbolService {
     @Autowired
     private ArbolDao arbolDao;
 
-    @Override
     @Transactional(readOnly = true)
-    public List<Arbol> getArboles(boolean activos) {
+    public List<Arbol> getArboles() {
         var lista = arbolDao.findAll();
-        if (activos) {
-            //Se deben eliminar de la lista los inactivos
-            lista.removeIf(c -> !c.isActivo());
-        }
         return lista;
     }
 
     @Override
     @Transactional(readOnly = true)
     public Arbol getArbol(Arbol arbol) {
-        return arbolDao.findById(arbol.getIdArbol()).orElse(null);
+        return arbolDao.findById(arbol.getId_arbol()).orElse(null);
     }
 
     @Override

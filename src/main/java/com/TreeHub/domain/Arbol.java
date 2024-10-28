@@ -11,26 +11,23 @@ private static final long serialVersionUID = 1l;
 
 @Id
 @GeneratedValue(strategy = GenerationType.IDENTITY)
-private Long idArbol;
-private Long idCategoria;
-private String descripcion;
-private String detalle;
-private double precio;
-private int existencias;
-private String rutaImagen;
-private boolean activo;
+private Long id_arbol;
+private String nombre_comun;
+private String tipo_flor;
+private int dureza_madera;
+private float altura;
+private String ruta_imagen;
 
-/*create table arbol (
-id_arbol INT NOT NULL AUTO_INCREMENT,
-id_categoria INT NOT NULL,
-descripcion VARCHAR(30) NOT NULL,
-detalle VARCHAR(1600) NOT NULL,
-precio double,
-existencias int,
-ruta_imagen varchar(1024),
-activo bool,
-PRIMARY KEY (id_arbol),
-foreign key fk_arbol_caregoria (id_categoria) references categoria(id_categoria)
-)*/
+
+/*CREATE TABLE arbol (
+    id_arbol INT NOT NULL AUTO_INCREMENT,
+    nombre_comun VARCHAR(50) NOT NULL,
+    tipo_flor VARCHAR(50) NOT NULL,
+    dureza_madera INT NOT NULL,
+    altura FLOAT NOT NULL,
+    ruta_imagen VARCHAR(1024),
+    PRIMARY KEY (id_arbol)
+) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4;
+*/
 
 }

@@ -20,7 +20,7 @@ public class ArbolController {
     
     @GetMapping("/listado")
     public String listado(Model model){
-        var lista=arbolService.getArboles(false);
+        var lista=arbolService.getArboles();
         model.addAttribute("arboles", lista);
         model.addAttribute("totalArboles", lista.size());
         return "/arbol/listado";
@@ -33,11 +33,11 @@ public class ArbolController {
             @RequestParam("imagenFile") MultipartFile imagenFile) {        
         if (!imagenFile.isEmpty()) {
             arbolService.save(arbol);
-            arbol.setRutaImagen(
+            arbol.setRuta_imagen(
                     firebaseStorageService.cargaImagen(
                             imagenFile, 
                             "arbol", 
-                            arbol.getIdArbol()));
+                            arbol.getId_arbol()));
         }
         arbolService.save(arbol);
         return "redirect:/arbol/listado";
