@@ -69,7 +69,8 @@
                 </div>
             </div>
         </section>
-        <!-- 4 Fragmento que se utiliza en la página modifca.html -->
+        // Modificar Arbol
+
         <section th:fragment="editarArbol">
             <div class="row">
                 <div class="col-md-2"></div>
@@ -82,7 +83,7 @@
                         <input type="hidden" name="id_arbol" th:field="*{id_arbol}"/>
                         <input type="hidden" name="ruta_imagen" th:field="*{ruta_imagen}"/>
                         <section th:replace="~{arbol/fragmentos :: botonesEditar}"/>
-                        <div id=details>
+                        <div id="details">
                             <div class="container">
                                 <div class="row">
                                     <div class="col">
@@ -95,15 +96,25 @@
                                                     <label for="nombre_comun">[[#{arbol.nombre_comun}]]</label>
                                                     <input type="text" class="form-control" 
                                                            name="nombre_comun" th:field="*{nombre_comun}"
-                                                           required="true">
+                                                           required="true" />
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label for="activo">[[#{arbol.activo}]]</label>
-                                                    <input class="form-check-input" 
-                                                           type="checkbox" 
-                                                           name="activo" 
-                                                           id="activo"
-                                                           th:field="*{activo}">
+                                                    <label for="tipo_flor">[[#{arbol.tipo_flor}]]</label>
+                                                    <input type="text" class="form-control" 
+                                                           name="tipo_flor" th:field="*{tipo_flor}"
+                                                           required="true" />
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="dureza_madera">[[#{arbol.dureza_madera}]]</label>
+                                                    <input type="number" class="form-control" 
+                                                           name="dureza_madera" th:field="*{dureza_madera}"
+                                                           required="true" />
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="altura">[[#{arbol.altura}]]</label>
+                                                    <input type="number" class="form-control" 
+                                                           name="altura" th:field="*{altura}" step="0.01"
+                                                           required="true" />
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="imagen">[[#{arbol.ruta_imagen}]]</label>
@@ -116,16 +127,19 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
                     </form>
                 </div>
             </div>
         </section>
-        <!-- 5 Fragmento que se utiliza en el fragmento anterior -->
+
+
+        // Botones disponibles en editar
         <section th:fragment="botonesEditar">
-            <div class="container py-4 mb-4 bg-light">
+            <div class="container py-4 mb-4" style="background-color: #90ee90">
                 <div class="row">
                     <div class="col-md-4 d-grid">
-                        <a th:href="@{/arbol/listado}" class="btn btn-primary">
+                        <a th:href="@{/arbol/listado}" class="btn btn-warning">
                             <i class="fas fa-arrow-left"></i> [[#{accion.regresar}]]
                         </a>
                     </div>
