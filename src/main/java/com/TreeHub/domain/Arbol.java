@@ -30,8 +30,11 @@ public class Arbol implements Serializable {
 
     @Column(name = "ruta_imagen")
     private String ruta_imagen;
+    
+    @Column(name = "id_estado")
+    private boolean id_estado;
 
-
+    
     /*CREATE TABLE arbol (
     id_arbol INT NOT NULL AUTO_INCREMENT,
     nombre_comun VARCHAR(50) NOT NULL,

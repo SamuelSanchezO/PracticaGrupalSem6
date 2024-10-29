@@ -22,7 +22,7 @@
                 </div>
             </div>
         </section>
-        
+
         // Configuracion del boton
         <section th:fragment="agregarArbol">
             <div id="agregarArbol" 
@@ -61,6 +61,12 @@
                                     <label for="altura">[[#{arbol.altura}]]</label>
                                     <input type="number" class="form-control" 
                                            name="altura" step="0.01" required="true"/>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="id_estado">[[#{arbol.activo}]]</label>
+                                    <input class="form-check-input" type="checkbox" 
+                                           name="id_estado" id="id_estado"/>
+                                              </div>
                                 <div class="mb-3">
                                     <label for="imagen">[[#{arbol.ruta_imagen}]]</label>
                                     <input class="form-control" 
@@ -69,10 +75,10 @@
                                            onchange="readURL(this);"/>
                                     <img id="blah" src="#" alt="your image" height="200"/>
                                 </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button class="btn btn-primary" type="submit">Guardar</button>
-                            </div>
+
+                                <div class="modal-footer">
+                                    <button class="btn btn-primary" type="submit">Guardar</button>
+                                </div>
                         </form>
                     </div>
                 </div>
@@ -126,6 +132,11 @@
                                                            required="true" />
                                                 </div>
                                                 <div class="mb-3">
+                                                    <label for="id_estado">[[#{arbol.activo}]]</label>
+                                                    <input class="form-check-input" type="checkbox" 
+                                                           name="id_estado" id="id_estado"/>
+                                                              </div>
+                                                <div class="mb-3">
                                                     <label for="imagen">[[#{arbol.ruta_imagen}]]</label>
                                                     <input class="form-control" type="file" name="imagenFile"
                                                            onchange="readURL(this);" />
@@ -166,7 +177,7 @@
                 </div>
             </div>
         </section>
-        
+
         <section th:fragment="listadoArboles">
             <div class="container">
                 <div class="row">
@@ -183,6 +194,7 @@
                                                 <th>#</th>
                                                 <th>[[#{arbol.nombre_comun}]]</th>
                                                 <th>[[#{arbol.ruta_imagen}]]</th>
+                                                <th>[[#{arbol.estado}]]</th>
                                                 <th></th>
                                             </tr>
                                         </thead>
@@ -191,16 +203,17 @@
                                                 <td>[[${c.id_arbol}]]</td>
                                                 <td>[[${c.nombre_comun}]]</td>
                                                 <td><img th:src="@{${c.ruta_imagen}}" height="95"/></td>
+                                                <td th:text="${c.id_estado} ? 'Activo' : 'Inactivo'"></td>
                                                 <td>
                                                     <div class="d-flex flex-column align-items-start">
-                                                    <a class="btn btn-warning mb-2"
-                                                       th:href='@{/arbol/eliminar/}+${c.id_arbol}'>
-                                                        <i class="fas fa-trash"></i> [[#{accion.eliminar}]]   
-                                                    </a>
-                                                    <a class="btn btn-success"
-                                                       th:href='@{/arbol/modificar/}+${c.id_arbol}'>
-                                                        <i class="fas fa-pencil"></i> [[#{accion.actualizar}]]   
-                                                    </a>
+                                                        <a class="btn btn-warning mb-2"
+                                                           th:href='@{/arbol/eliminar/}+${c.id_arbol}'>
+                                                            <i class="fas fa-trash"></i> [[#{accion.eliminar}]]   
+                                                        </a>
+                                                        <a class="btn btn-success"
+                                                           th:href='@{/arbol/modificar/}+${c.id_arbol}'>
+                                                            <i class="fas fa-pencil"></i> [[#{accion.actualizar}]]   
+                                                        </a>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -213,14 +226,14 @@
                             </div>
                         </div>
                     </div>  
-                     <div class="col-md-3">
-                         <div class='card text-center text-white m-2' style="background-color: #004522">
-                             <div class='card-body'>  
-                                 <h3>[[#{arbol.total}]]</h3>
-                                 <h4><i class="fas fa-tree"></i> [[${totalArboles}]]</h4>
-                             </div>
-                         </div>
-                      </div>     
+                    <div class="col-md-3">
+                        <div class='card text-center text-white m-2' style="background-color: #004522">
+                            <div class='card-body'>  
+                                <h3>[[#{arbol.total}]]</h3>
+                                <h4><i class="fas fa-tree"></i> [[${totalArboles}]]</h4>
+                            </div>
+                        </div>
+                    </div>     
                 </div>
             </div>
         </section>
