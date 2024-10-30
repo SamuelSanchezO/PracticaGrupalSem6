@@ -5,7 +5,7 @@ import com.TreeHub.domain.Arbol;
 import java.util.List;
 
 public interface ArbolService {
-//Se obtiene un arraylist con los registros de la tabla categoría, todos los registros o solo los activos
+//Se obtiene un arraylist con los registros de la tabla arbol, todos los registros o solo los activos
 
     public List<Arbol> getArboles();
 // Se obtiene un Arbol, a partir del id de un arbol
